@@ -53,6 +53,11 @@ namespace Lab2WS
 
         private static void ExecuteScrambledWordsManualEntryScenario()
         {
+
+            String scrambled = Console.ReadLine();
+            String[] scrambledWords = scrambled.Split(',');
+            DisplayMatchedScrambledWords(scrambledWords);
+
             // 1 get the user's input - comma separated string containing scrambled words
             // 2 Extract the words into a string (red,blue,green) 
             // 3 Call the DisplayMatchedUnscrambledWords method passing the scrambled words string array

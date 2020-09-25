@@ -15,13 +15,30 @@ namespace Lab2WS
                 {
                     if (scrambledWord.Equals(word, StringComparison.OrdinalIgnoreCase))
                     {
-                        //matchedWords.Add(BuildMatchedWord(scrambledWord, word));
+                        matchedWords.Add(BuildMatchedWord(scrambledWord, word));
 
                         matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
 
                     }
                     else
                     {
+                        Char[] scramble = scrambledWord.ToCharArray();
+                        Char[] charword = word.ToCharArray();
+                        Array.Sort(scramble);
+                        Array.Sort(charword);
+                        scramble.ToString();
+                        charword.ToString();
+
+                        if (scrambledWord.Equals(word, StringComparison.OrdinalIgnoreCase))
+                        {
+                            matchedWords.Add(BuildMatchedWord(scrambledWord, word));
+                            matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
+
+                        }
+                        else
+                        {
+
+                        }
                         //convert strings into character arrays i.e. ToCharArray()
                         //sort both character arrays
                         //convert sorted character arrays into strings (toString)
