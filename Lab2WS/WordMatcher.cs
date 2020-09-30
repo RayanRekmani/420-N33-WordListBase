@@ -15,7 +15,7 @@ namespace Lab2WS
                 {
                     if (scrambledWord.Equals(word, StringComparison.OrdinalIgnoreCase))
                     {
-                        matchedWords.Add(BuildMatchedWord(scrambledWord, word));
+                        //matchedWords.Add(BuildMatchedWord(scrambledWord, word));
 
                         matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
 
@@ -26,17 +26,13 @@ namespace Lab2WS
                         Char[] charword = word.ToCharArray();
                         Array.Sort(scramble);
                         Array.Sort(charword);
-                        scramble.ToString();
-                        charword.ToString();
+                        string sortedScambled = new string(scramble); //scramble.ToString();
+                        string sortedWord = new string(charword); //charword.ToString();
 
-                        if (scrambledWord.Equals(word, StringComparison.OrdinalIgnoreCase))
+                        if (sortedScambled.Equals(sortedWord, StringComparison.OrdinalIgnoreCase))
                         {
-                            matchedWords.Add(BuildMatchedWord(scrambledWord, word));
+                            //matchedWords.Add(BuildMatchedWord(scrambledWord, word));
                             matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
-
-                        }
-                        else
-                        {
 
                         }
                     }
@@ -44,7 +40,7 @@ namespace Lab2WS
                 }
             }
 
-            return null;
+            return matchedWords;
         }
 
         MatchedWord BuildMatchedWord(string scrambledWord, string word)

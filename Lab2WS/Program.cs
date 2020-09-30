@@ -67,7 +67,7 @@ namespace Lab2WS
 
             List<MatchedWord> matchedWords = wordMatcher.Match(scrambledWords, wordList);
 
-            if(matchedWords==null)
+            if(matchedWords.Count == 0)
             {
                 Console.WriteLine("No words found.");
             }
