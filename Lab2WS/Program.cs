@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Lab2WS
 {
@@ -12,35 +13,36 @@ namespace Lab2WS
         {
             try
             {
-                Console.WriteLine("Enter the scrambled words manually or as a file: f - file, m = manual");
+                Boolean condition = false;
 
-                string option = Console.ReadLine() ?? throw new Exception("String is null");
-
-                switch (option.ToUpper())
+                do
                 {
-                    case "F":
-                        Console.WriteLine("Enter the full path and filename >");
-                        ExecuteScrambledWordsInFileScenario();
-                        break;
-                    case "M":
-                        Console.WriteLine("Enter word(s) separated by a comma");
-                        ExecuteScrambledWordsManualEntryScenario();
-                        break;
-                    default:
-                        Console.WriteLine("The entered option was not recognized");
-                        break;
-                }
+                    Console.WriteLine("Enter the scrambled words manually or as a file: f - file, m = manual");
 
-                // Optional for now (when you have no loop)  (Take out when finished)
-                Console.ReadKey();
+                    string option = Console.ReadLine() ?? throw new Exception("String is null");
+                
+                    switch (option.ToUpper())
+                    {
+                        case "F":
+                            Console.WriteLine("Enter the full path and filename >");
+                            ExecuteScrambledWordsInFileScenario();
+                            break;
+                        case "M":
+                            Console.WriteLine("Enter word(s) separated by a comma");
+                            ExecuteScrambledWordsManualEntryScenario();
+                            break;
+                        default:
+                            Console.WriteLine("The entered option was not recognized. Please try again.");
+                            condition = true;
+                            break;
+                    }
+                } while (condition);
 
             }
             catch (Exception e)
             {
                 Console.WriteLine("Sorry an error has occurred.. " + e.Message);
             }
-            
-
 
         }
 
@@ -53,29 +55,29 @@ namespace Lab2WS
 
         private static void ExecuteScrambledWordsManualEntryScenario()
         {
-
             String scrambled = Console.ReadLine();
             String[] scrambledWords = scrambled.Split(',');
             DisplayMatchedScrambledWords(scrambledWords);
-
-            // 1 get the user's input - comma separated string containing scrambled words
-            // 2 Extract the words into a string (red,blue,green) 
-            // 3 Call the DisplayMatchedUnscrambledWords method passing the scrambled words string array
 
         }
 
         private static void DisplayMatchedScrambledWords(string[] scrambledWords)
         {
-            string[] wordList = fileReader.Read(@"wordlist.txt"); // Put in a constants file. CAPITAL LETTERS.  READONLY.
+            string[] wordList = fileReader.Read(ConstantsFile.WordList);
 
             List<MatchedWord> matchedWords = wordMatcher.Match(scrambledWords, wordList);
 
-
-            // Rule:  Use a formatter to display ... eg:  {0}{1}
-
-            // Rule:  USe an IF to determine if matchedWords is empty or not......
-            //            if empty - display no words found message.
-            //            if NOT empty - Display the matches.... use "foreach" with the list (matchedWords)
+            if(matchedWords==null)
+            {
+                Console.WriteLine("No words found.");
+            }
+            else
+            {
+                foreach (MatchedWord s in matchedWords)
+                {
+                    Console.WriteLine("Words {0} and {1} match", s.ScrambledWord, s.Word);
+                }
+            }
         }
     }
 }

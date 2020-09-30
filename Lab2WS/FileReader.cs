@@ -6,14 +6,14 @@ namespace Lab2WS
     {
         public string[] Read(string filename)
         {
-            if (!File.Exists(filename))
-            {
-                return null;
-            }
-            else
+            if (File.Exists(filename))
             {
                 string[] lines = File.ReadAllLines(filename);
                 return lines;
+            }
+            else
+            {
+                return null;
             }
         }
     }
